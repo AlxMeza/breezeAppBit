@@ -17,21 +17,22 @@ class ApiController extends Controller
         $data_csv = [];
 
 
-        $db_fields = ['nombre', 'apellido_paterno', 'apellido_materno', 'email', 'telefono', 'rol', 'contrasenia'];
+        // $db_fields = ['nombre', 'apellido_paterno', 'apellido_materno', 'email', 'telefono', 'rol', 'contrasenia'];
+        $db_fields = ['name', 'apellido_paterno', 'apellido_materno', 'email', 'telefono', 'rol', 'password'];
         
         while(($line = fgetcsv($data)) !== false){ 
             $line[6] = Hash::make($line[6]);
             $data_csv[] = array_combine($db_fields, $line);
         }
         fclose($data);
-        DB::table('asesores')->insert($data_csv);
+        DB::table('users')->insert($data_csv);
         return response()->json(["Message: " => 'Data upload succesfully'], 200);
     }
 
     public function postAsesor ( Request $request ) {
         $data = $request->all();
-        $data['contrasenia'] = Hash::make($data['contrasenia']);
-        $data = DB::table('asesores')->insert($data);
+        $data['password'] = Hash::make($data['password']);
+        $data = DB::table('users')->insert($data);
         return response(["message" => "Success"], 201);
     }
 
