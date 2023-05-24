@@ -16,12 +16,12 @@ export default function Documents (){
         let _totalSize = totalSize;
         _totalSize += e.files[0].size
         setTotalSize(_totalSize)
-        setTotalSize(_totalSize);
     }
 
     const onTemplateUpload = (e) => {
         setTotalSize(e.files[0].size)
         toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded Succcesfully'});
+        setTotalSize(0);
     }
 
     const onTemplateRemove = (file, callback) => {
