@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
-{
+{   
+    /*-------------- Asesores methods --------------*/
     public function postAsesores (Request $request){
         $file = $request->file('files');
         $file = $file[0];
@@ -36,6 +37,7 @@ class ApiController extends Controller
         return response(["message" => "Success"], 201);
     }
 
+    /*------------ Clientes Methods --------------*/
     public function postClientes (Request $request){
         $file = $request->file('files');
         $file = $file[0];
@@ -51,5 +53,13 @@ class ApiController extends Controller
         fclose($data);
         DB::table('clientes')->insert($data_csv);
         return response()->json(["Message: " => 'Data upload succesfully'], 200);
+    }
+
+    public function getClient ( $identifier ){
+        $client = DB::table('clientes')->where('clabe', $identifier)->first();
+        if($client !== null){
+            return response()->json(["data" => $client, "message" => "Success"], 200);
+        }
+        return response()->json(["data" => null, "message" => "Client not found"], 404);
     }
 }

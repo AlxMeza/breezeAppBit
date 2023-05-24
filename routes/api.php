@@ -23,3 +23,5 @@ Route::post('/asesor', 'App\Http\Controllers\ApiController@postAsesor');
 
 Route::post('/asesores', 'App\Http\Controllers\ApiController@postAsesores');
 Route::post('/clientes', 'App\Http\Controllers\ApiController@postClientes');
+
+Route::get('/cliente/{identifier}', 'App\Http\Controllers\ApiController@getClient');

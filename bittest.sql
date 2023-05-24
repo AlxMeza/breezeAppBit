@@ -12,6 +12,17 @@ create table asesores (
     contrasenia varchar(255) not null
 );
 
+create table users (
+	id int not null primary key auto_increment,
+    name varchar(255) not null,
+	apellido_paterno varchar(255) not null,
+    apellido_materno varchar(255) not null,
+    email varchar(255) not null unique,
+    telefono varchar(20),
+    rol varchar(20) not null,
+    password varchar(255) not null
+);
+
 create table clientes (
 	id int not null primary key auto_increment,
 	nombre varchar(255) not null,
